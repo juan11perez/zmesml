@@ -1,9 +1,11 @@
 # zmesml
 
+
+docker container for zoneminder + zmeventserver + mlapi
 ```
   zm136:
     container_name: zm136
-    image: juan11perez/zmesml-nvidia #juan11perez/zm136 juan11perez/zmesml
+    image: juan11perez/zmesml
     restart: unless-stopped
     hostname: UNRAID  
     runtime: nvidia
@@ -37,3 +39,13 @@
     devices:
     - /dev/apex_0:/dev/apex_0
     ```
+
+Create user in the persistent config volume with below commands:
+
+```
+docker exec -it juan11perez/zmesml /bin/bash
+```
+```
+cd /config && python3 /var/lib/zmeventnotification/mlapi_dbuser.py
+```
+
