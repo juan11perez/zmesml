@@ -43,7 +43,7 @@ docker container for zoneminder + zmeventserver + mlapi
 Create user in the persistent config volume with below commands:
 
 ```
-docker exec -it juan11perez/zmesml /bin/bash
+docker exec -it zm136 /bin/bash
 ```
 ```
 cd /config/db && python3 /var/lib/zmeventnotification/mlapi_dbuser.py
