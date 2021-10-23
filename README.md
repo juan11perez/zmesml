@@ -38,7 +38,7 @@ docker container for zoneminder + zmeventserver + mlapi
             device_ids: ["GPU-XXXXXXXXXXXXXXXXXXXXXXXXXXX"]        
     devices:
     - /dev/apex_0:/dev/apex_0
-    ```
+    
 
 Create user in the persistent config volume with below commands:
 
