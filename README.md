@@ -46,6 +46,6 @@ Create user in the persistent config volume with below commands:
 docker exec -it juan11perez/zmesml /bin/bash
 ```
 ```
-cd /config && python3 /var/lib/zmeventnotification/mlapi_dbuser.py
+cd /config/db && python3 /var/lib/zmeventnotification/mlapi_dbuser.py
 ```
 
