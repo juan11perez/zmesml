@@ -1,5 +1,5 @@
-FROM	phusion/baseimage:master
-LABEL 	maintainer="jcp"
+FROM		phusion/baseimage:master
+LABEL		maintainer="jcp"
 
 ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		DEBIAN_FRONTEND="noninteractive" \
@@ -17,8 +17,8 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		OPEN_CV_VERSION="4.5.4" \
 		APP_DIR="/var/lib/zmeventnotification"
 
-COPY	defaults/ /root/
-COPY	init/ /etc/my_init.d/
+COPY		defaults/ /root/
+COPY		init/ /etc/my_init.d/
 RUN		chmod +x /etc/my_init.d/*
 
 RUN		add-apt-repository -y ppa:iconnor/zoneminder-$ZM_VERS && \
@@ -71,7 +71,7 @@ RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libe
 		rm -rf /var/lib/{apt,dpkg,cache,log}
 
 		# install coral usb libraries
-RUN 	echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
+RUN		echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
 		curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
 		apt-get update && apt-get -y install gasket-dkms libedgetpu1-std python3-pycoral
 
@@ -138,9 +138,9 @@ VOLUME \
 		["/config"] \
 		["/var/cache/zoneminder"]
 
-EXPOSE	80 443 5000 9000
+EXPOSE		80 443 5000 9000
 
 CMD		["/sbin/my_init"]
 
 #Set the workdir
-WORKDIR	${APP_DIR}
+WORKDIR		${APP_DIR}
