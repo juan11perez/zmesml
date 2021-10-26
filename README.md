@@ -10,7 +10,7 @@ docker container for zoneminder + zmeventserver + mlapi
     hostname: UNRAID  
     runtime: nvidia
     network_mode: "bridge"
-    privileged: true
+    privileged: false
     shm_size: '8gb'   
     volumes:
     - /mnt/cache/appdata/cctv/zm136/config:/config:rw
