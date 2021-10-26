@@ -1,7 +1,8 @@
 FROM		phusion/baseimage:master
-LABEL		maintainer="jcp"
+LABEL 		maintainer="jcp"
 
-ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
+ENV		APP_DIR="/var/lib/zmeventnotification" \
+		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		DEBIAN_FRONTEND="noninteractive" \
 		DISABLE_SSH="true" \
 		HOME="/root" \
@@ -14,9 +15,8 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		ZM_VERS="1.36" \
 		PUID="99" \
 		PGID="100"\
-		OPEN_CV_VERSION="4.5.4" \
-		APP_DIR="/var/lib/zmeventnotification"
-
+        	OPEN_CV_VERSION='4.5.4'
+		
 COPY		defaults/ /root/
 COPY		init/ /etc/my_init.d/
 RUN		chmod +x /etc/my_init.d/*
@@ -71,7 +71,7 @@ RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libe
 		rm -rf /var/lib/{apt,dpkg,cache,log}
 
 		# install coral usb libraries
-RUN		echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
+RUN 		echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
 		curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
 		apt-get update && apt-get -y install gasket-dkms libedgetpu1-std python3-pycoral
 
