@@ -487,7 +487,6 @@ chown -R www-data:www-data /var/lib/zmeventnotification/models/coral_edgetpu 2>/
 # Symbolic link for hook files in /config
 mkdir -p /var/lib/zmeventnotification/bin
 ln -sf /config/hook/zm_detect.py /var/lib/zmeventnotification/bin/zm_detect.py
-# ln -sf /config/hook/zm_detect_old.py /var/lib/zmeventnotification/bin/zm_detect_old.py
 ln -sf /config/hook/zm_train_faces.py /var/lib/zmeventnotification/bin/zm_train_faces.py
 ln -sf /config/hook/train_faces.py /var/lib/zmeventnotification/bin/train_faces.py
 ln -sf /config/hook/zm_event_start.sh /var/lib/zmeventnotification/bin/zm_event_start.sh
