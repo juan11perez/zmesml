@@ -101,6 +101,14 @@ if [ ! -f /config/opencv/opencv_ok ]; then
 	echo "no" > /config/opencv/opencv_ok
 fi
 
+# Handle the mlapi logger file
+if [ -f /etc/logrotate.d/mlapi ]; then
+	echo "Moving mlapi logger"
+	mv /root/mlapi /etc/logrotate.d/mlapi
+else
+	echo "File mlapi logger already moved"
+fi
+
 # Handle the zmeventnotification.pl
 if [ -f /etc/zm/zmeventnotification.pl ]; then
 	echo "Moving the event notification server"
