@@ -38,17 +38,17 @@ else
 	echo "File zmeventnotification.ini already moved"
 fi
 
-# Handle the mlapiconfig.ini file
-if [ -f /var/lib/zmeventnotification/mlapiconfig.ini ]; then
-	echo "Moving mlapiconfig.ini"
-	cp /var/lib/zmeventnotification/mlapiconfig.ini /config/mlapiconfig.ini.default
-	if [ ! -f /config/mlapiconfig.ini ]; then
-		mv /var/lib/zmeventnotification/mlapiconfig.ini /config/mlapiconfig.ini
+# Handle the mlapiconfig.yml file
+if [ -f /var/lib/zmeventnotification/mlapiconfig.yml ]; then
+	echo "Moving mlapiconfig.yml"
+	cp /var/lib/zmeventnotification/mlapiconfig.yml /config/mlapiconfig.yml.default
+	if [ ! -f /config/mlapiconfig.yml ]; then
+		mv /var/lib/zmeventnotification/mlapiconfig.yml /config/mlapiconfig.yml
 	else
-		rm -rf /var/lib/zmeventnotification/mlapiconfig.ini
+		rm -rf /var/lib/zmeventnotification/mlapiconfig.yml
 	fi
 else
-	echo "File mlapiconfig.ini already moved"
+	echo "File mlapiconfig.yml already moved"
 fi
 
 # Handle the secrets.ini file
@@ -62,6 +62,19 @@ if [ -f /etc/zm/secrets.ini ]; then
 	fi
 else
 	echo "File secrets.ini already moved"
+fi
+
+# Handle the zm_secrets.yml file
+if [ -f /etc/zm/zm_secrets.yml ]; then
+	echo "Moving zm_secrets.yml"
+	cp /etc/zm/zm_secrets.yml /config/zm_secrets.yml.default
+	if [ ! -f /config/zm_secrets.yml ]; then
+		mv /etc/zm/zm_secrets.yml /config/zm_secrets.yml
+	else
+		rm -rf /etc/zm/zm_secrets.yml
+	fi
+else
+	echo "File zm_secrets.yml already moved"
 fi
 
 # Create opencv folder if it doesn't exist
@@ -101,6 +114,14 @@ if [ ! -f /config/opencv/opencv_ok ]; then
 	echo "no" > /config/opencv/opencv_ok
 fi
 
+# # Handle the mlapi logger file
+# if [ -f /etc/logrotate.d/mlapi ]; then
+# 	echo "Moving mlapi logger"
+# 	mv /root/mlapi /etc/logrotate.d/mlapi
+# else
+# 	echo "File mlapi logger already moved"
+# fi
+
 # Handle the zmeventnotification.pl
 if [ -f /etc/zm/zmeventnotification.pl ]; then
 	echo "Moving the event notification server"
@@ -119,6 +140,15 @@ fi
 # else
 # 	echo "Pushover api already moved"
 # fi
+
+# Handle the gotify_zmes.sh file
+if [ -f /var/lib/zmeventnotification/bin/gotify_zmes.sh ]; then
+	echo "Moving gotify_zmes.sh"
+	mv /var/lib/zmeventnotification/bin/gotify_zmes.sh /config/hook/gotify_zmes.sh
+	chmod +x /config/hook/gotify_zmes.sh 2>/dev/null
+else
+	echo "File gotify_zmes.sh already moved"
+fi
 
 # Handle the es_rules.json
 if [ -f /etc/zm/es_rules.json ]; then
@@ -224,10 +254,10 @@ chown -R $PUID:$PGID /config/ssmtp
 chmod -R 777 /config/ssmtp
 chown -R $PUID:$PGID /config/zmeventnotification.*
 chmod 666 /config/zmeventnotification.*
-chown -R $PUID:$PGID /config/mlapiconfig.ini
-chmod 666 /config/mlapiconfig.ini
-chown -R $PUID:$PGID /config/secrets.ini
-chmod 666 /config/secrets.ini
+chown -R $PUID:$PGID /config/mlapiconfig.yml
+chmod 666 /config/mlapiconfig.yml
+chown -R $PUID:$PGID /config/zm_secrets.yml
+chmod 666 /config/zm_secrets.yml
 # chown -R $PUID:$PGID /config/opencv
 # chmod 777 /config/opencv
 # chmod 666 /config/opencv/*
@@ -338,12 +368,12 @@ fi
 ln -sf /config/zmeventnotification.ini /etc/zm/zmeventnotification.ini
 chown www-data:www-data /etc/zm/zmeventnotification.ini
 
-# Symbolink for /config/mlapiconfig.ini
-ln -sf /config/mlapiconfig.ini /var/lib/zmeventnotification/mlapiconfig.ini
-chown www-data:www-data /var/lib/zmeventnotification/mlapiconfig.ini
+# Symbolink for /config/mlapiconfig.yml
+ln -sf /config/mlapiconfig.yml /var/lib/zmeventnotification/mlapiconfig.yml
+chown www-data:www-data /var/lib/zmeventnotification/mlapiconfig.yml
 
-# Symbolink for /config/secrets.ini
-ln -sf /config/secrets.ini /etc/zm/
+# Symbolink for /config/zm_secrets.yml
+ln -sf /config/zm_secrets.yml /etc/zm/
 
 # Set multi-ports in apache2 for ES.
 # Start with default configuration.
@@ -377,17 +407,17 @@ if [ ! -d /config/hook ]; then
 	mkdir /config/hook
 fi
 
-# Handle the objectconfig.ini file
-if [ -f /etc/zm/objectconfig.ini ]; then
-	echo "Moving objectconfig.ini"
-	cp /etc/zm/objectconfig.ini /config/hook/objectconfig.ini.default
-	if [ ! -f /config/hook/objectconfig.ini ]; then
-		mv /etc/zm/objectconfig.ini /config/hook/objectconfig.ini
+# Handle the objectconfig.yml file
+if [ -f /etc/zm/objectconfig.yml ]; then
+	echo "Moving objectconfig.yml"
+	cp /etc/zm/objectconfig.yml /config/hook/objectconfig.yml.default
+	if [ ! -f /config/hook/objectconfig.yml ]; then
+		mv /etc/zm/objectconfig.yml /config/hook/objectconfig.yml
 	else
-		rm -rf /etc/zm/objectconfig.ini
+		rm -rf /etc/zm/objectconfig.yml
 	fi
 else
-	echo "File objectconfig.ini already moved"
+	echo "File objectconfig.yml already moved"
 fi
 
 # Handle the config_upgrade script
@@ -433,12 +463,12 @@ else
 fi
 
 # Handle the train_faces.py file
-if [ -f /var/lib/zmeventnotification/bin/train_faces.py ]; then
-	echo "Moving train_faces.py"
-	mv /var/lib/zmeventnotification/bin/train_faces.py /config/hook/train_faces.py
-else
-	echo "File train_faces.py already moved"
-fi
+# if [ -f /var/lib/zmeventnotification/bin/train_faces.py ]; then
+# 	echo "Moving train_faces.py"
+# 	mv /var/lib/zmeventnotification/bin/train_faces.py /config/hook/train_faces.py
+# else
+# 	echo "File train_faces.py already moved"
+# fi
 
 # Symbolic link for known_faces in /config
 rm -rf /var/lib/zmeventnotification/known_faces
@@ -488,11 +518,12 @@ chown -R www-data:www-data /var/lib/zmeventnotification/models/coral_edgetpu 2>/
 mkdir -p /var/lib/zmeventnotification/bin
 ln -sf /config/hook/zm_detect.py /var/lib/zmeventnotification/bin/zm_detect.py
 ln -sf /config/hook/zm_train_faces.py /var/lib/zmeventnotification/bin/zm_train_faces.py
-ln -sf /config/hook/train_faces.py /var/lib/zmeventnotification/bin/train_faces.py
+# ln -sf /config/hook/train_faces.py /var/lib/zmeventnotification/bin/train_faces.py
 ln -sf /config/hook/zm_event_start.sh /var/lib/zmeventnotification/bin/zm_event_start.sh
 ln -sf /config/hook/zm_event_end.sh /var/lib/zmeventnotification/bin/zm_event_end.sh
+ln -sf /config/hook/gotify_zmes.sh /var/lib/zmeventnotification/bin/gotify_zmes.sh
 chmod +x /var/lib/zmeventnotification/bin/*
-ln -sf /config/hook/objectconfig.ini /etc/zm/
+ln -sf /config/hook/objectconfig.yml /etc/zm/
 
 # Create known_faces folder if it doesn't exist
 if [ ! -d /config/hook/known_faces ]; then
@@ -542,5 +573,5 @@ fi
 
 # start mlapi service
 if [ -f /config/db/db.json ]; then
-	python3 /var/lib/zmeventnotification/mlapi.py -c /var/lib/zmeventnotification/mlapiconfig.ini
+	python3 /var/lib/zmeventnotification/mlapi.py -c /var/lib/zmeventnotification/mlapiconfig.yml
 fi
