@@ -258,6 +258,8 @@ chown -R $PUID:$PGID /config/mlapiconfig.yml
 chmod 666 /config/mlapiconfig.yml
 chown -R $PUID:$PGID /config/zm_secrets.yml
 chmod 666 /config/zm_secrets.yml
+chown -R $PUID:$PGID /config/secrets.ini
+chmod 666 /config/secrets.ini
 # chown -R $PUID:$PGID /config/opencv
 # chmod 777 /config/opencv
 # chmod 666 /config/opencv/*
@@ -374,6 +376,9 @@ chown www-data:www-data /var/lib/zmeventnotification/mlapiconfig.yml
 
 # Symbolink for /config/zm_secrets.yml
 ln -sf /config/zm_secrets.yml /etc/zm/
+
+# Symbolink for /config/secrets.ini
+ln -sf /config/secrets.ini /etc/zm/
 
 # Set multi-ports in apache2 for ES.
 # Start with default configuration.
