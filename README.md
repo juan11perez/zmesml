@@ -46,6 +46,6 @@ Create user in the persistent config volume with below commands:
 docker exec -it neozmesml /bin/bash
 ```
 ```
-cd /config/db && python3 /var/lib/zmeventnotification/mlapi_dbuser.py -u mlapitest -p test123
+cd /config && python3 /var/lib/zmeventnotification/mlapi_dbuser.py -u mlapitest -p test123
 ```
 
