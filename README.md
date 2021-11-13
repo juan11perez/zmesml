@@ -3,9 +3,9 @@
 
 docker container for zoneminder + zmeventserver + mlapi
 ```
-  zm136:
-    container_name: zm136
-    image: juan11perez/zmesml
+  neozmesml:
+    container_name: neozmesml
+    image: juan11perez/neozmesml
     restart: unless-stopped
     hostname: UNRAID  
     runtime: nvidia
@@ -13,7 +13,7 @@ docker container for zoneminder + zmeventserver + mlapi
     privileged: false
     shm_size: '8gb'   
     volumes:
-    - /mnt/cache/appdata/cctv/zm136/config:/config:rw
+    - /mnt/cache/appdata/cctv/neozmesml/config:/config:rw
     - /usr/local/cuda:/usr/local/cuda
     - type: bind
       source: /mnt/disks/storage/cctv/zm136
@@ -43,9 +43,9 @@ docker container for zoneminder + zmeventserver + mlapi
 Create user in the persistent config volume with below commands:
 
 ```
-docker exec -it zm136 /bin/bash
+docker exec -it neozmesml /bin/bash
 ```
 ```
-cd /config/db && python3 /var/lib/zmeventnotification/mlapi_dbuser.py
+cd /config/db && python3 /var/lib/zmeventnotification/mlapi_dbuser.py -u mlapitest -p test123
 ```
 
