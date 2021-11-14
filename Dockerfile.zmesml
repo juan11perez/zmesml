@@ -131,7 +131,7 @@ RUN		cd /root && \
 
 RUN		apt-get -y clean && \
 		apt-get -y autoremove && \
-		rm -rf /tmp/* /var/tmp/* /root/zmeventnotification* /root/my_init && \
+		rm -rf /tmp/* /var/tmp/* /root/* && \
 		chmod +x /etc/my_init.d/*.sh
 
 VOLUME \
