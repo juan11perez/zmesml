@@ -57,13 +57,15 @@ RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libe
 		cd /var/lib/zmeventnotification/ && git clone https://github.com/baudneo/mlapi.git . && \
 		# Replacements in mlapiconfig.yml file
 		sed -i 's#{{base_data_path}}/db#/config/db#g' /var/lib/zmeventnotification/mlapiconfig.yml && \
-		sed -i 's#log_path: /my/custom/log/path#log_path: /var/log/zm#g' /var/lib/zmeventnotification/mlapiconfig.yml && \
+		sed -i 's$#log_path: /my/custom/log/path$log_path: /var/log/zm$g' /var/lib/zmeventnotification/mlapiconfig.yml && \
 		sed -i 's#{{base_data_path}}/mlapisecrets.yml#/etc/zm/zm_secrets.yml#g' /var/lib/zmeventnotification/mlapiconfig.yml && \
 		sed -i 's#base_data_path: .#base_data_path: /var/lib/zmeventnotification#g' /var/lib/zmeventnotification/mlapiconfig.yml && \
 		# sed -i 's#Werkzeug#Werkzeug ==1.0.1#g' /var/lib/zmeventnotification/requirements.txt && \		
 		pip3 install -r requirements.txt && \
 		cd /root && git clone https://github.com/baudneo/zmeventnotification.git && cd zmeventnotification && \
 		# Replace certificate path in zm_secrets.yml file
+		sed -i 's#/path/to/cert/file.pem#/etc/apache2/ssl/zoneminder.crt#g'  /root/zmeventnotification/secrets.ini  && \
+		sed -i 's#/path/to/key/file.pem#/etc/apache2/ssl/zoneminder.key#g'  /root/zmeventnotification/secrets.ini && \
 		sed -i 's#/etc/apache2/ssl/fullchain.pem#/etc/apache2/ssl/zoneminder.crt#g'  /root/zmeventnotification/hook/zm_secrets.yml  && \
 		sed -i 's#/etc/apache2/ssl/privkey.pem#/etc/apache2/ssl/zoneminder.key#g'  /root/zmeventnotification/hook/zm_secrets.yml && \
 		echo "MLAPI_SECRET_KEY: change_to_some_secret_key" >> /root/zmeventnotification/hook/zm_secrets.yml && \
