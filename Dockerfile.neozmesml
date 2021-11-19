@@ -67,7 +67,7 @@ RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libe
 		sed -i 's#/etc/apache2/ssl/fullchain.pem#/etc/apache2/ssl/zoneminder.crt#g'  /root/zmeventnotification/hook/zm_secrets.yml  && \
 		sed -i 's#/etc/apache2/ssl/privkey.pem#/etc/apache2/ssl/zoneminder.key#g'  /root/zmeventnotification/hook/zm_secrets.yml && \
 		echo "MLAPI_SECRET_KEY: change_to_some_secret_key" >> /root/zmeventnotification/hook/zm_secrets.yml && \
-		sed -i 's#/zmes_gotify.sh#gotify_zmes.sh#g'  /root/zmeventnotification/install.sh && \
+		sed -i 's#zmes_gotify.sh#gotify_zmes.sh#g'  /root/zmeventnotification/install.sh && \
 		# sed -i 's#/etc/zm/secrets.ini#/etc/zm/zm_secrets.yml#g'  /root/zmeventnotification/zmeventnotification.ini && \
 		yes | INSTALL_CORAL_EDGETPU=yes INSTALL_YOLOV3=yes INSTALL_YOLOV4=yes INSTALL_TINYYOLOV3=no INSTALL_TINYYOLOV4=yes ./install.sh  && \
 		cd /root && git clone https://github.com/baudneo/pyzm.git && cd pyzm && pip3 install . && \
