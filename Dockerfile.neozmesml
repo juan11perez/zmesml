@@ -53,7 +53,7 @@ RUN		rm /etc/mysql/my.cnf && \
 
 		# install mlapi & zmeventnotification
 RUN		apt-get -y install libopenblas-dev liblapack-dev libblas-dev libev-dev libevdev2 libgeos-dev && \
-		pip3 install future && pip3 install numpy && mkdir /var/lib/zmeventnotification && \
+		pip3 install future && pip3 install numpy && pip3 install face-recognition && mkdir /var/lib/zmeventnotification && \
 		cd /var/lib/zmeventnotification/ && git clone https://github.com/baudneo/mlapi.git . && \
 		# Replacements in mlapiconfig.yml file
 		sed -i 's#{{base_data_path}}/db#/config/db#g' /var/lib/zmeventnotification/mlapiconfig.yml && \
