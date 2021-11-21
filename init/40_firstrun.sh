@@ -144,10 +144,12 @@ fi
 # Handle the gotify_zmes.sh file
 if [ -f /var/lib/zmeventnotification/bin/gotify_zmes.sh ]; then
 	echo "Moving gotify_zmes.sh"
-	mv /var/lib/zmeventnotification/bin/gotify_zmes.sh /config/hook/gotify_zmes.sh
-	chmod +x /config/hook/gotify_zmes.sh 2>/dev/null
-else
-	echo "File gotify_zmes.sh already moved"
+	cp /var/lib/zmeventnotification/bin/gotify_zmes.sh /config/hook/gotify_zmes.sh.default
+	if [ ! -f /config/hook/gotify_zmes.sh ]; then
+		mv /var/lib/zmeventnotification/bin/gotify_zmes.sh /config/hook/gotify_zmes.sh
+	else
+		rm -rf /var/lib/zmeventnotification/bin/gotify_zmes.sh
+	fi
 fi
 
 # Handle the es_rules.json
