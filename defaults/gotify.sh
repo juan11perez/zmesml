@@ -22,7 +22,7 @@ if [[ "$MESSAGE" != "Motion: All" ]] && [[ "$3" == "doorbell" ]]; then
         \"client::display\": {
           \"contentType\": \"text/markdown\",
         \"client::notification\": {
-          \"click\": \"{ 'url': 'https://myzmdomain/zm/cgi-bin/nph-zms?mode=jpeg&frame=1&replay=none&source=event&event=${EVENT_ID}&connkey=77493&token=${ZM_TOKEN}'}\"
+          \"click\": \"{ 'url': '${ZM_PORTAL}/cgi-bin/nph-zms?mode=jpeg&frame=1&replay=none&source=event&event=${EVENT_ID}&connkey=77493&token=${ZM_TOKEN}'}\"
         }
       }
     }
