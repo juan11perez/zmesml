@@ -29,7 +29,3 @@ if [[ "$MESSAGE" != "Motion: All" ]] && [[ "$3" == "doorbell" ]]; then
   }"
 
 fi
-
-
-
-# \"message\": \"${MESSAGE^}\n![Embed the event right into the notification](${ZM_PORTAL}/cgi-bin/nph-zms?mode=jpeg&frame=1&replay=none&source=event&event=${EVENT_ID}&connkey=77493&${ZM_TOKEN})\n ![Camera Image](${ZM_PORTAL}/index.php?view=image&eid=${EVENT_ID}&fid=objdetect&popup=1&${ZM_TOKEN})\",
