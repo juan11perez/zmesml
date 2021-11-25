@@ -101,6 +101,19 @@ if [ ! -f /config/opencv/opencv_ok ]; then
 	echo "no" > /config/opencv/opencv_ok
 fi
 
+# Handle the gotify.sh file
+if [ -f /root/gotify.sh ]; then
+	echo "Moving gotify.sh"
+	cp /root/gotify.sh /config/hook/gotify.sh.default
+	if [ ! -f /config/hook/gotify.sh ]; then
+		mv /root/gotify.sh /config/hook/opgotifyncv.sh
+	else
+		rm -rf /root/gotify.sh
+	fi
+else
+	echo "File gotify.sh already moved"
+fi
+
 # Handle the zmeventnotification.pl
 if [ -f /etc/zm/zmeventnotification.pl ]; then
 	echo "Moving the event notification server"
@@ -236,6 +249,7 @@ chmod 777 /config/keys
 chmod 666 /config/keys/*
 chown -R www-data:www-data /config/push/
 chown -R www-data:www-data /var/lib/zmeventnotification/
+chmod +x /config/hook/gotify.sh
 # chmod +x /config/opencv/opencv.sh
 # chmod +x /config/opencv/debug_opencv.sh
 # chmod +x /config/opencv/opencv.sh.default
